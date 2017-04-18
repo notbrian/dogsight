@@ -1,52 +1,97 @@
-import React, { Component } from 'react';
-import { Meteor } from 'meteor/meteor';
+import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
 import RequestForm from './requestForm.jsx';
 import Dropzone from 'react-dropzone';
-import { fs } from "fs"
+import {fs} from "fs"
 import swal from "sweetalert"
 import 'sweetalert/dist/sweetalert.css';
 
 // Import crucial modules
 
 export default class LostDog extends Component {
-  // Export the LostDog component for use in other files
-  onDrop(files) {
-    // Creates the onDrop method for the Dropzone component, loads a 'files' parameter
-    var reader  = new FileReader();
-    // Create a new FileReader to read the image
-    reader.addEventListener("load", function () {
-    // Create a event listener on the reader to retrieve the data once it finishes converting the image to base64
-      Meteor.call("searchDog", reader.result, (err, data) => {
-        // Call the searchDog method on the server side and pass it the base64 converted image
-      if (err) {
-        // If the server responds with an error, render a error alert on the screen
-        swal("Oops...", "Something went wrong!", "error");
-      }
-      else {
-        let formattedData = data[0].map((element, currentValue) => {
-          return ` ${currentValue + 1}: ${element} `
-        })
-        // Format each of the label results in the form: (number in list): (element), e.g 1. Terrier , 2. Dog
-        swal("Success!", formattedData, "success")
-        // Render a success alert with the data on the screen
-      }
-    })
+    // Export the LostDog component for use in other files
+    constructor() {
+        super()
+        this.state = {
+            name: ""
+        }
+        this.onDrop = this.onDrop.bind(this)
+        this.handleChangeName = this.handleChangeName.bind(this)
+        this.handleChangeGender = this.handleChangeGender.bind(this)
+    }
+    onDrop(files) {
+        // Creates the onDrop method for the Dropzone component, loads a 'files' parameter
+        var reader = new FileReader();
+        // Create a new FileReader to read the image
+        let dog = this.state
+        // Set the value of dog as the state of the LostDog
+        let dogGender = null
+        // Create variable dogGender
+        if (dog.gender == "female") {
+            dogGender = "her!"
+        } else {
+            dogGender = "him!"
+        }
+        // Depending on the gender specified, assign dogGender to either be "her!" or "him!"
+        reader.addEventListener("load", function() {
+            // Create a event listener on the reader to retrieve the data once it finishes converting the image to base64
+            Meteor.call("searchDog", reader.result, dog, (err, data) => {
+                // Call the searchDog method on the server side and pass it the base64 converted image and dog object
+                if (err) {
+                    // If the server responds with an error, render a error alert on the screen
+                    swal("Oops...", "Something went wrong!", "error");
+                } else {
+                    let formattedData = data[1].responses[0].labelAnnotations.map((element, currentValue) => {
+                        let capitalizedLabel = element.description.slice(0, 1).toUpperCase() + element.description.slice(1, 300000)
+                        // Capitalizes first letter of the label
+                        let properPercentage = element.score.toFixed(2) * 100 + "%"
+                        // Rounds confidence level to 2 decimal places and converts to proper properPercentage
+                        return `${capitalizedLabel}: ${properPercentage} \n`
+                        // Returns a string in the form '(Capitalized Label): (Percentage)' and adds a new line escape character
+                    })
+                    // Format each of the label results in the form: (Label): (Confidence Level), e.g 'Terrier: 94%''
+                    let displayMessage = `We've stored ${dog.name} in our database and we'll let you know if we find ${dogGender} \n\n ${formattedData.join("")}`
+                    // Craft a display message to the user with the dog name and gender
+                    swal("Success!", displayMessage, "success")
+                    // Render a success alert with the data on the screen
+                }
+            })
 
-  }, false)
-    reader.readAsDataURL(files[0])
-    // Tells the FileReader to convert the image into a base64 string
+        }, false)
+        reader.readAsDataURL(files[0])
+        // Tells the FileReader to convert the image into a base64 string
 
     }
-
-  render() {
-    return(
-      <div>
-        <h1 id="title"> Lost a dog page </h1>
-        <Dropzone id="dropzone" onDrop={this.onDrop}>
-          // Render a react Dropzone element, when a image is dropped into it, run the onDrop method on the lostDog component
-          <div>Try dropping some files here, or click to select files to upload.</div>
-        </Dropzone>
-      </div>
-    )
-  }
+    handleChangeName(event) {
+        this.setState({name: event.target.value});
+    }
+    // Method to handle changing name value in LostDog
+    handleChangeGender(event) {
+        this.setState({gender: event.target.value});
+    }
+    // Method to handle changing gender value in LostDog
+    render() {
+        return (
+            <div>
+                <h1 id="title">
+                    Lost a dog page
+                </h1>
+                <form>
+                    <input type="text" placeholder="Enter your Dogs name" onChange={this.handleChangeName}/>
+                    {/* Input box for Dog name */}
+                    <br></br>
+                    <input type="radio" name="gender" value="male" onChange={this.handleChangeGender}/>
+                    Male
+                    <br></br>
+                    <input type="radio" name="gender" value="female" onChange={this.handleChangeGender}/>
+                    Female
+                    {/* Radio buttons for Dog gender */}
+                </form>
+                <Dropzone id="dropzone" onDrop={this.onDrop}>
+                    {/* Render a react Dropzone element, when a image is dropped into it, run the onDrop method on the lostDog component */}
+                    <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
+            </div>
+        )
+    }
 }
