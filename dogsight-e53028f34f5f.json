@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "dogsight-163617",
+  "private_key_id": "e53028f34f5f4dfb9bb3f5bac7e4be320115b701",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD2Gg5HqN6jnU6R\nWR3gEvrTMkNV2koU4ax9yZ9fcGHG/FbJQ8ZoxJwqAIFQjjD3iHSXdOySr7cDydTq\n8RsThJOwf7U0HmMJy9X1RIGFvk8V57/zrelvrbvslQo9au+nub84r0BErqkrNG59\nFVYBBGtbHfKZ66ymw7j/ycsWiF/IeMeiUbIK125/3FqwOZZC7/BPMPOLCIMIipSp\nBEVdNLwmrGYdJx2Aku4Cv01guD7Go7FoLr0YDqAkpB+SYBFzEafAhdfpQ2j3LT6M\nWUEimx8nDPbgSAaQ+vo5FaAUNZSZiUv8NbJqVELdzV4q2LoUgDmYATNlSgl3yAWO\nHVG8jd3JAgMBAAECggEALcWI1GEfD3UpcLUPbmZ5SiB2D5iq4JlceISwZJLFTLoP\n9hzp4QB4PwObCX14tAEoFidD/MA7nLPEKvIu5AFrao9GB2yDZQYJRDW6lUJg+SUC\nOXMmEIRSiFzr66Jg8mQEoalOnbeSdRuqVQ9L0KKeyPKX9XK0yMtsM/63C/jPP7yB\nnmU3fLr9WVK2h5SPNs81MPnBGS4PtToRFNAgU5oBdbTwXV1ywv1KjXdzbWWf14em\nlAUzcs5S0bly/EBeniBznNPWLcnu3YOjV8lLO/tDhsmMtBa8/Eds4AaLh+L7c9jM\nfLa5bFbJAeVsGwjn4Ny2+Lgw+E8RsUDjP/NClzyS9QKBgQD8Lu7FVOch2YWRylF6\nVa4R1jjodjm1cwZCDQXUB4AzlO2RzbgZko1FrPFCz9zQ3+5Fo4ocHF4/CjiOHewc\nRrAS9+Ttxihw+fahUf642dBRxR7QQQPN4SHidhYLk10KOnEfmLcR2A+93mZfhxQW\n9FHjR/FMPm4OlnvzkJoXDC4QAwKBgQD5049+mHDq1Zfqr1x3rdzeJ1VLA6/5Q2bU\nInKlmEa7G4OEQ2HStizboOOM06pHQNdb2ukQ9/SPulPySGyWrCjA95oRUJLRBR7n\nwc6CCnI5UEP6WzrfrYITd7zHwu4aXlVDRUndr/tcQmmT9Uy8SqgdB5mUxPHSlyVf\nfjn7ZdqPQwKBgQDVMyBt9/+H4IxJ2w/TKwiEz+VAsmLLgjkyMixROx4pfajzcUZJ\naFrDIxi88VqvxAF/ImmqplkPVqbFj4qDxUcqYiVK2BJsoQbfD6EXyh2SY+JPEggT\nUFgDSu4MT0ODWDE3EzcCgPWeAZ3u+RYE6f0o9zOKz+TftF2KZx++iG+Q3QKBgBv3\n9GOe211fBj/u2/JGE6kHTEQ2qHfGdPeg16b0Uk7WOLYQ+R2m6YS5EWCNvc12U+Xj\nrx4INGf22zkPpKCFq5ZW4fe4RoeCBEC78MucMcd61fFsTz4FZb+aMxdGGnP3RaJf\nWnKoJgLhKIK4/ptB3GpLlIUUO2JxK2zya7laYMqTAoGAet5zw74j5O+Zk4tK+LUg\nVsa+3Sod1E5zp0io01LmiEiBcwq9Q8QU3tIgDJQPxxiKf+vZIun7rcdsIJ1axrDk\nIKXrIYT5xbWxPm1II5xEktrxiYXv5PknhOOTJJZouu8zfXPEFCRSG0yzM7SHcH/I\n1DtT6wOxUVRQvMA7JWSwFAs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vision@dogsight-163617.iam.gserviceaccount.com",
+  "client_id": "111225664189993361032",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vision%40dogsight-163617.iam.gserviceaccount.com"
+}
