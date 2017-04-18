@@ -6,9 +6,13 @@ import {BrowserRouter as Router, Route, Link, Redirect, withRouter} from 'react-
 
 const MainScreen = () => (
     <div id="dashboard">
+
         <Link to="/lostdog">Lost a Dog</Link>
         {/* Link when pressed routes to /lostdog */}
-        <br></br>
+        <br>
+
+        </br>
+
         <Link to="/founddog">Found a Dog</Link>
     </div>
 )
@@ -57,8 +61,11 @@ class LoginForm extends Component {
                     <form onSubmit={this.login}>
                         {/* onSubmit of this form, run login() under the LoginForm component */}
                         <input type="text" placeholder="username"/>
+
                         <input type="text" placeholder="password"/>
+
                         <input type="submit" value="login"/>
+
                     </form>
                 </div>
             )
@@ -80,9 +87,13 @@ export default class MainPage extends Component {
             <Router>
                 <div>
                     <LoginForm/> {/* Render the LoginForm component*/}
+
                     <Route exact path="/dashboard" component={MainScreen}/> {/* If the window path is /dashboard, render the MainScreen component*/}
+
                     <Route exact path="/lostdog" component={LostDog}/> {/* If the window path is /lostdog, render the LostDog component*/}
+
                     <Route exact path="/founddog" component={NoMatch}/> {/* If the window path is /founddog, render the NoMatch component*/}
+
                 </div>
             </Router>
         )
