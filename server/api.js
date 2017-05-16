@@ -1,9 +1,5 @@
-import {
-    Meteor
-} from 'meteor/meteor';
-import {
-    Dogdata
-} from "./data.js";
+import { Meteor } from 'meteor/meteor';
+import { Dogdata } from "/imports/api/data.js";
 import Vision from "@google-cloud/vision";
 
 // Import crucial modules
@@ -30,7 +26,7 @@ Meteor.methods({
                     Name: dog.name,
                     Gender: dog.gender,
                     Characteristics: detection[0],
-                    Image: imageBase64
+                    Image: image
                 })
                 // Inserts a data entry into the Dogdata mongoDB collection
                 return detection

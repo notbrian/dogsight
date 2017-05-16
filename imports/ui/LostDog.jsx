@@ -5,19 +5,25 @@ import Dropzone from 'react-dropzone';
 import {fs} from "fs"
 import swal from "sweetalert"
 import 'sweetalert/dist/sweetalert.css';
+import DogEntry from './DogEntry.jsx'
+import { createContainer } from 'meteor/react-meteor-data';
+import { Dogdata } from "/imports/api/data.js"
+// remember to make a wrapper for this
 
-// Import crucial modules
+// Import crucial modules and styling
 
-export default class LostDog extends Component {
+class LostDog extends Component {
     // Export the LostDog component for use in other files
     constructor() {
         super()
         this.state = {
             name: ""
         }
+        // Initalizes state with name as an empty string
         this.onDrop = this.onDrop.bind(this)
         this.handleChangeName = this.handleChangeName.bind(this)
         this.handleChangeGender = this.handleChangeGender.bind(this)
+        // Bind context of this to methods
     }
     onDrop(files) {
         // Creates the onDrop method for the Dropzone component, loads a 'files' parameter
@@ -70,6 +76,15 @@ export default class LostDog extends Component {
         this.setState({gender: event.target.value});
     }
     // Method to handle changing gender value in LostDog
+    renderDogs() {
+
+    return this.props.DogdataReact.map((dogObject, index) => {
+      console.log(dogObject)
+      return(
+        <DogEntry key={index} dog={dogObject}/>
+      )
+    })
+    }
     render() {
         return (
             <div>
@@ -91,7 +106,14 @@ export default class LostDog extends Component {
                     {/* Render a react Dropzone element, when a image is dropped into it, run the onDrop method on the lostDog component */}
                     <div>Try dropping some files here, or click to select files to upload.</div>
                 </Dropzone>
+                {this.renderDogs()}
             </div>
         )
     }
 }
+
+export default createContainer(() => {
+  return {
+    DogdataReact: Dogdata.find({}).fetch(),
+  };
+}, LostDog);

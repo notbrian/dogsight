@@ -21,3 +21,13 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
+
+.dogEntry {
+  margin-bottom: 5px;
+  border: 2px dashed black;
+  padding-left: 5px;
+}
+
+.dogEntry img {
+  max-width: 100px;
+}

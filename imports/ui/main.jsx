@@ -86,7 +86,7 @@ export default class MainPage extends Component {
         return (
             <Router>
                 <div>
-                    <LoginForm/> {/* Render the LoginForm component*/}
+                    <Route exact path="/" component={LoginForm}/> {/* If the window path is /dashboard, render the MainScreen component*/}
 
                     <Route exact path="/dashboard" component={MainScreen}/> {/* If the window path is /dashboard, render the MainScreen component*/}
 
