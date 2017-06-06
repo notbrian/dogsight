@@ -11,7 +11,7 @@ Meteor.methods({
         const vision = Vision({
             projectId: projectId,
             // Passes projectID
-            keyFilename: '/Users/brian/Documents/Coding/dogsight/dogsight-e53028f34f5f.json'
+            credentials: require('../dogsight-e53028f34f5f.json')
             // Passes API keys
         });
         // Starts a Vision client
