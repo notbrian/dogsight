@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import LostDog from './LostDog.jsx'
 import {BrowserRouter as Router, Route, Link, Redirect, withRouter} from 'react-router-dom'
-
+import FoundDog from './FoundDog.jsx'
+import Chatroom from './Chatroom.jsx'
 // Import crucial modules
 
 const MainScreen = () => (
     <div id="dashboard">
-
-        <Link to="/lostdog">Lost a Dog</Link>
+        <img src="Kanye.svg"/>
+        <Link to="/lostdog" className="dashboardButton" id="LostDog">Lost a Dog</Link>
         {/* Link when pressed routes to /lostdog */}
         <br>
 
         </br>
 
-        <Link to="/founddog">Found a Dog</Link>
+        <Link to="/founddog" className="dashboardButton">Found a Dog</Link>
     </div>
 )
 
@@ -49,22 +50,24 @@ class LoginForm extends Component {
         let renderThis = null
         // Create a variable called renderThis with value of null
         if (this.state.isLoggedIn) {
-            renderThis = <Redirect to="/dashboard"/>
+            renderThis = <Redirect push to="/dashboard"/>
             // If the user is logged in, redirect them to /dashboard
         } else {
             //Else render the login form
             renderThis = (
-                <div>
+                <div id="loginForm">
+                    <img src="Kanye.svg"/>
                     <h1 id="title">
-                        DogSight Login Page
+                        DogSight
                     </h1>
+                    <p className="subtitle"> report lost/found dogs </p>
                     <form onSubmit={this.login}>
                         {/* onSubmit of this form, run login() under the LoginForm component */}
-                        <input type="text" placeholder="username"/>
+                        <input className="loginBox" id="username" type="text" placeholder="username"/>
 
-                        <input type="text" placeholder="password"/>
+                        <input className="loginBox" id="password" type="text" placeholder="password"/>
 
-                        <input type="submit" value="login"/>
+                        <input type="submit" id="loginButton" value="login"/>
 
                     </form>
                 </div>
@@ -82,6 +85,9 @@ class LoginForm extends Component {
 // Create LoginForm component for the login form
 export default class MainPage extends Component {
     // Export this MainPage component for use in other files
+    constructor() {
+      super()
+    }
     render() {
         return (
             <Router>
@@ -92,7 +98,9 @@ export default class MainPage extends Component {
 
                     <Route exact path="/lostdog" component={LostDog}/> {/* If the window path is /lostdog, render the LostDog component*/}
 
-                    <Route exact path="/founddog" component={NoMatch}/> {/* If the window path is /founddog, render the NoMatch component*/}
+                    <Route exact path="/founddog" component={FoundDog}/> {/* If the window path is /founddog, render the NoMatch component*/}
+
+                    <Route exact path="/chatroom" component={Chatroom}/> {/* If the window path is /founddog, render the NoMatch component*/}
 
                 </div>
             </Router>

@@ -22,10 +22,17 @@ Meteor.methods({
             // Sends a label detection request to the Vision API and passes the image data
             .then(detection => {
                 // When the API responds, run this function with the detection parameter
+                var cleanedChar = detection[0].filter(value => {
+                  if (value == "dog" || value == "dog breed" || value == "mammal"  || value == "vertebrate" || value == "dog like mammal") {
+                    return false
+                  } else {
+                    return true
+                  }
+                })
                 Dogdata.insert({
                     Name: dog.name,
                     Gender: dog.gender,
-                    Characteristics: detection[0],
+                    Characteristics: cleanedChar,
                     Image: image
                 })
                 // Inserts a data entry into the Dogdata mongoDB collection

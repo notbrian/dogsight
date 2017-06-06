@@ -1,9 +1,13 @@
+* {
+  font-family: Avenir Next, sans-serif;
+}
 #title {
-  margin-top: 10%;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 #dashboard {
+  margin-top: 10%;
   text-align: center;
 }
 form {
@@ -13,21 +17,142 @@ form {
 a {
   text-align: center;
 }
-* {
-  font-family: SF, sans-serif;
-}
 
 #dropzone {
   margin-left: auto;
   margin-right: auto;
 }
+#lostDogDiv {
+  padding: 10px;
+  margin-top: 10%
+}
 
+#FoundDogDiv {
+  text-align: center;
+}
+
+#foundDogHeader {
+  max-width: 50px;
+}
+#inputName {
+  border: 0;
+  width: 200px;
+  text-align: center;
+  height: 20px;
+  border: 2px solid white;
+  font-size: 15px;
+  padding: 5px;
+  transition: border-color 0.3s;
+  margin-bottom: 3px;
+}
+
+#inputName:hover {
+  border-color: black;
+}
 .dogEntry {
-  margin-bottom: 5px;
-  border: 2px dashed black;
-  padding-left: 5px;
+  margin-top: 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  margin-left: 20px;
+  border: 2px solid black;
+  width: 200px;
+  height: 200px;
+  float: left;
 }
 
 .dogEntry img {
-  max-width: 100px;
+  display: block;
+  text-align: center;
+  height: 100px;
+  width: 100px;
+}
+
+#loginForm {
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 400px;
+  text-align: center;
+}
+
+.loginBox {
+  font-size: 20px;
+  border: none;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  transition: border-color 0.3s;
+
+}
+
+.loginBox:hover {
+  border-color: black;
+}
+
+#username {
+}
+
+#loginButton {
+  font-size: 15px;
+  border-radius: 0;
+  background-color: white;
+  border: 2px solid black;
+  transition: background-color 0.5s;
+  transition: color 0.5s;
+
+
+}
+
+#loginButton:hover {
+  background-color: black;
+  color: white;
+}
+
+.subtitle {
+  margin-top: 0;
+  color: grey;
+}
+
+.dashboardButton {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  border: 2px solid white;
+  padding: 20px;
+  background-color: #86BCFC;
+  display: block;
+  text-decoration: none;
+  transition: border 0.3s
+}
+
+.dashboardButton:hover {
+  border: 2px solid black;
+}
+#LostDog {
+  background-color: #FD9CA7;
+  margin-top: 20px;
+}
+
+#chatDiv {
+  margin-top: 10%;
+  text-align: center;
+}
+
+#chatbox {
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+  width: 200px;
+  border: 2px solid black;
+}
+
+.nameChat {
+  color: black;
 }

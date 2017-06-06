@@ -6,18 +6,20 @@ import {fs} from "fs"
 import swal from "sweetalert"
 import 'sweetalert/dist/sweetalert.css';
 import DogEntry from './DogEntry.jsx'
-import { createContainer } from 'meteor/react-meteor-data';
-import { Dogdata } from "/imports/api/data.js"
-// remember to make a wrapper for this
-
+import {createContainer} from 'meteor/react-meteor-data';
+import {Dogdata} from "/imports/api/data.js"
+import {BrowserRouter as Router, Route, Link, Redirect, withRouter} from 'react-router-dom'
+import FoundDog from './FoundDog.jsx'
 // Import crucial modules and styling
 
-class LostDog extends Component {
+export default class LostDog extends Component {
     // Export the LostDog component for use in other files
     constructor() {
         super()
         this.state = {
-            name: ""
+            name: "",
+            imageProcessed: false,
+            dogCharacteristics: ""
         }
         // Initalizes state with name as an empty string
         this.onDrop = this.onDrop.bind(this)
@@ -39,7 +41,7 @@ class LostDog extends Component {
             dogGender = "him!"
         }
         // Depending on the gender specified, assign dogGender to either be "her!" or "him!"
-        reader.addEventListener("load", function() {
+        reader.addEventListener("load", () => {
             // Create a event listener on the reader to retrieve the data once it finishes converting the image to base64
             Meteor.call("searchDog", reader.result, dog, (err, data) => {
                 // Call the searchDog method on the server side and pass it the base64 converted image and dog object
@@ -47,6 +49,7 @@ class LostDog extends Component {
                     // If the server responds with an error, render a error alert on the screen
                     swal("Oops...", "Something went wrong!", "error");
                 } else {
+                  console.log(data)
                     let formattedData = data[1].responses[0].labelAnnotations.map((element, currentValue) => {
                         let capitalizedLabel = element.description.slice(0, 1).toUpperCase() + element.description.slice(1, 300000)
                         // Capitalizes first letter of the label
@@ -58,7 +61,15 @@ class LostDog extends Component {
                     // Format each of the label results in the form: (Label): (Confidence Level), e.g 'Terrier: 94%''
                     let displayMessage = `We've stored ${dog.name} in our database and we'll let you know if we find ${dogGender} \n\n ${formattedData.join("")}`
                     // Craft a display message to the user with the dog name and gender
-                    swal("Success!", displayMessage, "success")
+                    swal({
+                        title: "Success!",
+                        text: displayMessage,
+                        type: "success"
+                    }, () => {
+                      var DogChar = data[1].responses[0].labelAnnotations.map((element) => {return element.description})
+                      this.setState({dogCharacteristics: DogChar})
+                      this.setState({imageProcessed: true})
+                    })
                     // Render a success alert with the data on the screen
                 }
             })
@@ -76,44 +87,29 @@ class LostDog extends Component {
         this.setState({gender: event.target.value});
     }
     // Method to handle changing gender value in LostDog
-    renderDogs() {
-
-    return this.props.DogdataReact.map((dogObject, index) => {
-      console.log(dogObject)
-      return(
-        <DogEntry key={index} dog={dogObject}/>
-      )
-    })
-    }
     render() {
+        if (this.state.imageProcessed) {
+          return <FoundDog dogChar={this.state.dogCharacteristics}></FoundDog>
+        }
         return (
-            <div>
+            <div id="lostDogDiv">
                 <h1 id="title">
-                    Lost a dog page
+                    Upload your dog
                 </h1>
                 <form>
-                    <input type="text" placeholder="Enter your Dogs name" onChange={this.handleChangeName}/>
-                    {/* Input box for Dog name */}
+                    <input id="inputName" type="text" placeholder="Enter your Dogs name" onChange={this.handleChangeName}/> {/* Input box for Dog name */}
                     <br></br>
                     <input type="radio" name="gender" value="male" onChange={this.handleChangeGender}/>
                     Male
                     <br></br>
                     <input type="radio" name="gender" value="female" onChange={this.handleChangeGender}/>
-                    Female
-                    {/* Radio buttons for Dog gender */}
+                    Female {/* Radio buttons for Dog gender */}
                 </form>
                 <Dropzone id="dropzone" onDrop={this.onDrop}>
                     {/* Render a react Dropzone element, when a image is dropped into it, run the onDrop method on the lostDog component */}
                     <div>Try dropping some files here, or click to select files to upload.</div>
                 </Dropzone>
-                {this.renderDogs()}
             </div>
         )
     }
 }
-
-export default createContainer(() => {
-  return {
-    DogdataReact: Dogdata.find({}).fetch(),
-  };
-}, LostDog);
