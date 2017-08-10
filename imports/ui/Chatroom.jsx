@@ -22,7 +22,7 @@ class Chatroom extends Component {
             )
         })
     }
-
+//Gurnoor Starts
     handleChangeName(event) {
         this.setState({name: event.target.value});
     }
@@ -54,6 +54,7 @@ class Chatroom extends Component {
         )
     }
 }
+// Gurnoor Ends
 
 export default createContainer(() => {
     return {ChatdataReact: Chatdata.find({}).fetch()};
