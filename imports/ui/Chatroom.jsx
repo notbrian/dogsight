@@ -23,7 +23,7 @@ class Chatroom extends Component {
         })
     }
 //Gurnoor Starts
-    handleChangeName(event) { 
+    handleChangeName(event) {
         this.setState({name: event.target.value});
     }
     handleChangeMessage(event) {
